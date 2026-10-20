@@ -68,8 +68,8 @@ function MuseumFooter() {
   return (
     <footer className="border-t border-burgundy/20 px-5 py-8 sm:px-8">
       <div className="mx-auto flex max-w-6xl flex-col gap-3 text-sm sm:flex-row sm:items-center sm:justify-between">
-        <p>Museum Pusaka Cakrawala — pengetahuan dan warisan untuk semua.</p>
-        <p>Tanpa iklan, biaya masuk, maupun tujuan komersial.</p>
+        <p>Museum Konoha  — pengetahuan dan warisan untuk semua.</p>
+        <p>Tugas Pancasila Kelompok 2.</p>
       </div>
     </footer>
   )
@@ -122,7 +122,7 @@ export default function HomePage() {
             <Landmark aria-hidden="true" size={22} />
           </span>
           <span>
-            <span className="block font-serif text-lg font-bold leading-tight sm:text-xl">Museum Pusaka Cakrawala</span>
+            <span className="block font-serif text-lg font-bold leading-tight sm:text-xl">Museum Konoha</span>
             <span className="mt-1 block text-[0.65rem] uppercase tracking-[0.16em] sm:text-xs">Arsip budaya dan peradaban</span>
           </span>
         </Link>
@@ -136,29 +136,26 @@ export default function HomePage() {
           <div>
             <p className="mb-5 text-sm font-bold uppercase tracking-[0.2em] text-terracotta">Merawat kisah lintas generasi</p>
             <h1 id="hero-title" className="max-w-2xl font-serif text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
-              Museum Purbakala Cakrawala
+              MUSEUM KONOHA
             </h1>
             <p className="mt-5 max-w-xl text-lg font-semibold leading-7">
-              Cakrawala Archaeological Heritage Museum
+              Konoha Archaeological Heritage Museum
             </p>
             <p className="mt-4 max-w-xl text-base leading-7 sm:text-lg sm:leading-8">
-              Melestarikan artefak, naskah, dan pusaka kuno dengan aksesibilitas tinggi dan tanpa komersialisasi.
+              Melestarikan artefak, naskah, dan pusaka kuno dengan aksesibilitas tinggi.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href="#koleksi" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-burgundy px-6 font-bold text-cream transition hover:bg-terracotta">
-                Examine Relics Collection <ArrowDown aria-hidden="true" size={18} />
+                Lihat koleksi <ArrowDown aria-hidden="true" size={18} />
               </a>
-              <Link to="/admin" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-burgundy px-6 font-bold transition hover:bg-burgundy hover:text-cream">
-                Staff Admin Access <ArrowUpRight aria-hidden="true" size={18} />
-              </Link>
+
             </div>
           </div>
-          <div role="img" aria-label="Ilustrasi artefak kuno yang disimpan dan dirawat di museum" className="relative grid aspect-[4/3] place-items-center overflow-hidden rounded-[2rem] border-4 border-burgundy bg-[radial-gradient(ellipse_at_50%_35%,#F8E0A4_0%,#31AAA9_70%)] p-3">
+          <div role="img" aria-label="Ilustrasi artefak kuno yang disimpan dan dirawat di museum" className="relative grid aspect-[4/3] place-items-center overflow-hidden rounded-[2rem] border-4 border-burgundy bg-[#F8E0A4] p-3">
             <div aria-hidden="true" className="absolute inset-5 rounded-[1.5rem] border border-burgundy/30" />
             <div aria-hidden="true" className="relative grid size-48 place-items-center rounded-full border border-burgundy/30 bg-cream/70 text-burgundy shadow-xl sm:size-64">
               <Landmark size={132} strokeWidth={1.15} className="size-28 sm:size-40" />
             </div>
-            <span className="absolute bottom-7 left-7 rounded-full bg-cream px-4 py-2 text-sm font-bold">Ruang belajar bersama</span>
           </div>
         </section>
 
