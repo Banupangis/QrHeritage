@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link, useParams } from 'react-router-dom'
 import { PROTOTYPE_ARTIFACTS } from '../data/prototypeArtifacts.js'
+import { getArtifactSlug, slugifyArtifactTitle } from '../lib/artifactSlug.js'
 import {
   ArrowLeft,
   Check,
@@ -104,6 +105,17 @@ export default function PublicArtifactView() {
         data = legacyResult.data
         fetchError = legacyResult.error
       }
+      if (!fetchError && !data && !UUID_PATTERN.test(id ?? '')) {
+        const legacySlugResult = await supabase
+          .from('artifacts')
+          .select('id, slug, title_id, title_en, era, description_id, description_en, material, location, image_url, image_alt, created_at')
+          .is('slug', null)
+        if (legacySlugResult.error) {
+          fetchError = legacySlugResult.error
+        } else {
+          data = legacySlugResult.data?.find((item) => slugifyArtifactTitle(item.title_id) === id) ?? null
+        }
+      }
       if (!active) return
       if (fetchError) {
         if (prototypeArtifact) {
@@ -118,6 +130,8 @@ export default function PublicArtifactView() {
         setArtifact(data)
         if (PROTOTYPE_ARTIFACTS.some((prototype) => prototype.id === data.id)) {
           setNotice('Anda sedang melihat artefak contoh untuk pratinjau museum.')
+        } else if (getArtifactSlug(data) !== data.slug) {
+          setNotice('Slug artefak ini belum tersimpan. Jalankan migrasi slug di Supabase untuk membuat tautan unik yang permanen.')
         }
       }
       setLoading(false)

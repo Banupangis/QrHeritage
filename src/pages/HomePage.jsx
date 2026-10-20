@@ -11,12 +11,13 @@ import {
   LoaderCircle,
 } from 'lucide-react'
 import { PROTOTYPE_ARTIFACTS } from '../data/prototypeArtifacts.js'
+import { getArtifactSlug } from '../lib/artifactSlug.js'
 import { supabase, supabaseConfigured } from '../lib/supabase.js'
 
 function ArtifactCard({ artifact }) {
   const titleId = artifact.title_id
   const titleEn = artifact.title_en
-  const slug = artifact.slug || artifact.id
+  const slug = getArtifactSlug(artifact)
   const summaryId = artifact.description_id || ''
   const summaryEn = artifact.description_en || ''
   const detailsPath = `/artifact/${encodeURIComponent(slug)}`

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { getArtifactSlug } from '../lib/artifactSlug.js'
 import { QRCodeCanvas } from 'qrcode.react'
 import {
   ArrowLeft,
@@ -28,7 +29,7 @@ const INPUT_CLASS = 'mt-1 w-full rounded-xl border border-burgundy/30 bg-white p
 const LABEL_CLASS = 'block text-sm font-semibold text-burgundy'
 const ArtifactPropType = PropTypes.shape({
   id: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired,
+  slug: PropTypes.string,
   title_id: PropTypes.string.isRequired,
   title_en: PropTypes.string,
   era: PropTypes.string.isRequired,
@@ -262,7 +263,8 @@ function drawWrappedText(context, text, centerX, startY, maxWidth, lineHeight) {
 }
 
 function QRStudioCard({ artifact, onDelete, deleting }) {
-  const artifactUrl = `${window.location.origin}/artifact/${encodeURIComponent(artifact.slug)}`
+  const artifactSlug = getArtifactSlug(artifact)
+  const artifactUrl = `${window.location.origin}/artifact/${encodeURIComponent(artifactSlug)}`
 
   async function downloadPrintableQR(event) {
     const sourceCanvas = event.currentTarget.closest('[data-qr-card]')?.querySelector('canvas')
@@ -294,7 +296,7 @@ function QRStudioCard({ artifact, onDelete, deleting }) {
     const objectUrl = URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = objectUrl
-    link.download = `qr-${artifact.slug}.png`
+    link.download = `qr-${artifactSlug}.png`
     document.body.append(link)
     link.click()
     link.remove()
