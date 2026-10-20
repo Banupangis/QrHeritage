@@ -25,7 +25,7 @@ const EMPTY_FORM = {
   description_en: '',
   image_alt: '',
 }
-const INPUT_CLASS = 'mt-1 w-full rounded-xl border border-burgundy/30 bg-white px-4 py-3 text-burgundy placeholder:text-burgundy/50'
+const INPUT_CLASS = 'mt-1 w-full min-w-0 max-w-md rounded-xl border border-burgundy/30 bg-white px-4 py-3 text-burgundy placeholder:text-burgundy/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'
 const LABEL_CLASS = 'block text-sm font-semibold text-burgundy'
 const ArtifactPropType = PropTypes.shape({
   id: PropTypes.string.isRequired,
@@ -58,9 +58,9 @@ function PasscodeGate({ onUnlock }) {
   }
 
   return (
-    <main className="grid min-h-screen place-items-center bg-cream px-5 py-10 text-burgundy">
-      <section className="w-full max-w-md rounded-3xl border border-burgundy/20 bg-white/70 p-7 shadow-xl sm:p-9">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4">
+    <main className="grid min-h-screen place-items-center overflow-x-hidden bg-cream px-5 py-10 text-burgundy">
+      <section className="w-full max-w-md rounded-3xl border border-burgundy/20 bg-white/70 p-5 shadow-xl sm:p-9">
+        <Link to="/" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
           <ArrowLeft aria-hidden="true" size={17} /> Kembali ke beranda
         </Link>
         <span className="mt-8 grid size-12 place-items-center rounded-full bg-primary/20"><KeyRound aria-hidden="true" size={24} /></span>
@@ -79,7 +79,7 @@ function PasscodeGate({ onUnlock }) {
             className={INPUT_CLASS}
           />
           {error && <p role="alert" className="mt-3 text-sm font-semibold text-terracotta">{error}</p>}
-          <button type="submit" className="mt-5 min-h-12 w-full rounded-full bg-burgundy px-5 font-bold text-cream hover:bg-terracotta">Masuk ke dashboard</button>
+          <button type="submit" className="mt-5 min-h-12 w-full rounded-full bg-burgundy px-5 font-bold text-cream hover:bg-terracotta focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">Masuk ke dashboard</button>
         </form>
         <p className="mt-5 border-t border-burgundy/15 pt-4 text-xs leading-5 text-burgundy/75">
           Passcode di browser adalah pembatas sederhana, bukan mekanisme autentikasi aman. Untuk produksi, lindungi operasi tulis dengan Supabase Auth dan kebijakan RLS berbasis peran.
@@ -177,24 +177,24 @@ function ArtifactForm({ onCreated }) {
   }
 
   return (
-    <section aria-labelledby="new-artifact-title" className="rounded-3xl border border-burgundy/20 bg-white/70 p-5 shadow-sm sm:p-8">
+    <section aria-labelledby="new-artifact-title" className="min-w-0 rounded-3xl border border-burgundy/20 bg-white/70 p-4 shadow-sm sm:p-8">
       <div className="flex items-center gap-3">
         <span className="grid size-11 place-items-center rounded-full bg-primary/20"><ImagePlus aria-hidden="true" size={21} /></span>
-        <div>
+        <div className="min-w-0">
           <h2 id="new-artifact-title" className="font-serif text-2xl font-bold">Tambah artefak</h2>
           <p className="mt-1 text-sm text-burgundy/75">Lengkapi informasi dalam Bahasa Indonesia dan Inggris.</p>
         </div>
       </div>
       <form onSubmit={submitArtifact} className="mt-6 grid gap-5 sm:grid-cols-2">
-        <div>
+        <div className="min-w-0">
           <label htmlFor="title_id" className={LABEL_CLASS}>Nama artefak · Indonesia</label>
           <input id="title_id" name="title_id" required maxLength={200} value={form.title_id} onChange={updateField} className={INPUT_CLASS} />
         </div>
-        <div>
+        <div className="min-w-0">
           <label htmlFor="title_en" className={LABEL_CLASS}>Artifact title · English</label>
           <input id="title_en" name="title_en" required maxLength={200} value={form.title_en} onChange={updateField} className={INPUT_CLASS} />
         </div>
-        <div>
+        <div className="min-w-0">
           <label htmlFor="era" className={LABEL_CLASS}>Era / periode</label>
           <input id="era" name="era" required maxLength={160} value={form.era} onChange={updateField} className={INPUT_CLASS} />
         </div>
@@ -202,27 +202,27 @@ function ArtifactForm({ onCreated }) {
           <label htmlFor="material" className={LABEL_CLASS}>Bahan</label>
           <input id="material" name="material" maxLength={200} value={form.material} onChange={updateField} className={INPUT_CLASS} />
         </div>
-        <div className="sm:col-span-2">
+        <div className="min-w-0 sm:col-span-2">
           <label htmlFor="location" className={LABEL_CLASS}>Lokasi / asal koleksi</label>
           <input id="location" name="location" maxLength={240} value={form.location} onChange={updateField} className={INPUT_CLASS} />
         </div>
-        <div className="sm:col-span-2">
+        <div className="min-w-0 sm:col-span-2">
           <label htmlFor="description_id" className={LABEL_CLASS}>Deskripsi · Bahasa Indonesia</label>
           <textarea id="description_id" name="description_id" required rows={5} maxLength={12000} value={form.description_id} onChange={updateField} className={INPUT_CLASS} />
         </div>
-        <div className="sm:col-span-2">
+        <div className="min-w-0 sm:col-span-2">
           <label htmlFor="description_en" className={LABEL_CLASS}>Description · English</label>
           <textarea id="description_en" name="description_en" required rows={5} maxLength={12000} value={form.description_en} onChange={updateField} className={INPUT_CLASS} />
         </div>
-        <div className="sm:col-span-2">
+        <div className="min-w-0 sm:col-span-2">
           <label htmlFor="image_alt" className={LABEL_CLASS}>Teks alternatif gambar</label>
           <input id="image_alt" name="image_alt" required maxLength={500} value={form.image_alt} onChange={updateField} className={INPUT_CLASS} />
           <p className="mt-1 text-xs text-burgundy/70">Deskripsikan informasi visual gambar secara singkat untuk pembaca layar.</p>
         </div>
-        <div className="sm:col-span-2">
+        <div className="min-w-0 sm:col-span-2">
           <label htmlFor="artifact-image" className={LABEL_CLASS}>Gambar artefak (opsional, maks. 10 MB)</label>
           <input id="artifact-image" name="image" type="file" accept="image/*" onChange={selectImage} className="sr-only" />
-          <label htmlFor="artifact-image" className="mt-2 flex min-h-14 cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-dashed border-burgundy/30 px-4 py-3 text-sm font-semibold hover:bg-primary/10">
+          <label htmlFor="artifact-image" className="mt-2 flex min-h-14 w-full max-w-md cursor-pointer items-center justify-center gap-2 break-all rounded-xl border-2 border-dashed border-burgundy/30 px-4 py-3 text-center text-sm font-semibold hover:bg-primary/10 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
             <Upload aria-hidden="true" size={18} /> {imageName || 'Pilih gambar untuk diunggah'}
           </label>
         </div>
@@ -231,7 +231,7 @@ function ArtifactForm({ onCreated }) {
             {error || message}
           </p>
         )}
-        <button type="submit" disabled={saving} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-burgundy px-6 font-bold text-cream hover:bg-terracotta disabled:cursor-wait disabled:opacity-60 sm:col-span-2 sm:justify-self-start">
+        <button type="submit" disabled={saving} className="inline-flex min-h-12 w-full max-w-md items-center justify-center gap-2 rounded-full bg-burgundy px-6 font-bold text-cream hover:bg-terracotta focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-60 sm:col-span-2 sm:justify-self-start">
           {saving ? <LoaderCircle className="animate-spin" aria-hidden="true" size={18} /> : <Upload aria-hidden="true" size={18} />}
           {saving ? 'Menyimpan artefak…' : 'Simpan artefak'}
         </button>
@@ -326,17 +326,17 @@ function QRStudioCard({ artifact, onDelete, deleting }) {
   }
 
   return (
-    <article data-qr-card className="flex flex-col rounded-2xl border border-burgundy/20 bg-cream p-4">
-      <div className="grid min-h-48 place-items-center rounded-xl bg-white p-4">
-        <QRCodeCanvas value={artifactUrl} size={160} level="H" includeMargin aria-label={`QR code untuk ${artifact.title_id}`} />
+    <article data-qr-card className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-burgundy/20 bg-cream p-4">
+      <div className="grid min-h-48 w-full max-w-md place-items-center overflow-hidden rounded-xl bg-white p-3 sm:p-4">
+        <QRCodeCanvas value={artifactUrl} size={160} level="H" includeMargin aria-label={`QR code untuk ${artifact.title_id}`} className="h-auto max-w-full" />
       </div>
       <h3 className="mt-4 line-clamp-2 min-h-12 font-serif text-lg font-bold">{artifact.title_id}</h3>
       <p className="mt-1 text-sm text-burgundy/75">{artifact.era}</p>
       <a href={artifactUrl} className="mt-2 break-all text-xs text-burgundy underline underline-offset-2">{artifactUrl}</a>
-      <button type="button" onClick={handleDownload} className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-burgundy px-4 text-sm font-bold text-cream hover:bg-terracotta">
+      <button type="button" onClick={handleDownload} className="mt-4 inline-flex min-h-11 w-full max-w-md items-center justify-center gap-2 rounded-full bg-burgundy px-3 text-sm font-bold text-cream hover:bg-terracotta focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
         <Download aria-hidden="true" size={17} /> Download QR printable
       </button>
-      <button type="button" onClick={() => onDelete(artifact)} disabled={deleting} className="mt-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-terracotta px-4 text-sm font-semibold text-terracotta hover:bg-terracotta hover:text-white disabled:opacity-50">
+      <button type="button" onClick={() => onDelete(artifact)} disabled={deleting} className="mt-2 inline-flex min-h-11 w-full max-w-md items-center justify-center gap-2 rounded-full border border-terracotta px-4 text-sm font-semibold text-terracotta hover:bg-terracotta hover:text-white focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50">
         <Trash2 aria-hidden="true" size={16} /> {deleting ? 'Menghapus…' : 'Hapus artefak'}
       </button>
     </article>
@@ -424,17 +424,17 @@ export default function AdminDashboard() {
   if (!unlocked) return <PasscodeGate onUnlock={() => { setLoading(true); setUnlocked(true) }} />
 
   return (
-    <main className="min-h-screen bg-cream px-5 pb-16 pt-6 text-burgundy sm:px-8">
+    <main className="min-h-screen overflow-x-hidden bg-cream px-5 pb-16 pt-6 text-burgundy sm:px-8">
       <div className="mx-auto max-w-6xl">
         <header className="flex flex-wrap items-center justify-between gap-4 border-b border-burgundy/20 pb-6">
           <div>
-            <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4">
+            <Link to="/" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
               <ArrowLeft aria-hidden="true" size={17} /> Beranda
             </Link>
             <h1 className="mt-5 font-serif text-4xl font-bold">Studio koleksi</h1>
             <p className="mt-2">Kelola artefak dan siapkan QR untuk ruang pamer.</p>
           </div>
-          <button type="button" onClick={() => { sessionStorage.removeItem('heritage-admin-unlocked'); setUnlocked(false) }} className="min-h-10 rounded-full border border-burgundy px-4 text-sm font-semibold hover:bg-white/50">
+          <button type="button" onClick={() => { sessionStorage.removeItem('heritage-admin-unlocked'); setUnlocked(false) }} className="min-h-11 rounded-full border border-burgundy px-4 text-sm font-semibold hover:bg-white/50 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
             Keluar dari admin
           </button>
         </header>
@@ -445,7 +445,7 @@ export default function AdminDashboard() {
           {pageMessage && <div role="status" className="rounded-2xl border border-primary bg-white/60 p-4 text-sm font-semibold">{pageMessage}</div>}
           <ArtifactForm onCreated={loadArtifacts} />
 
-          <section aria-labelledby="collection-title">
+          <section aria-labelledby="collection-title" className="min-w-0">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
                 <p className="text-sm font-bold uppercase tracking-[0.18em] text-terracotta">QR studio</p>
@@ -462,7 +462,7 @@ export default function AdminDashboard() {
                 <p className="mt-1 text-sm">Artefak yang disimpan akan muncul di sini bersama QR code-nya.</p>
               </div>
             ) : (
-              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-6 grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {artifacts.map((artifact) => (
                   <QRStudioCard key={artifact.id} artifact={artifact} onDelete={deleteArtifact} deleting={deletingId === artifact.id} />
                 ))}
