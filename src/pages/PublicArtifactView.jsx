@@ -186,7 +186,7 @@ export default function PublicArtifactView() {
   async function copyCitation() {
     const year = artifact.created_at ? new Date(artifact.created_at).getFullYear() : new Date().getFullYear()
     const workTitle = lang === 'ID' ? `${title} [Artefak museum]` : `${title} [Museum artifact]`
-    const citation = `Ruang Warisan. (${year}). ${workTitle}. ${window.location.origin}/artifact/${artifact.id}`
+    const citation = `Museum Konoha. (${year}). ${workTitle}. ${window.location.origin}/artifact/${artifact.id}`
     try {
       await navigator.clipboard.writeText(citation)
       setNotice(lang === 'ID' ? 'Sitasi akademik berhasil disalin.' : 'Academic citation copied.')
