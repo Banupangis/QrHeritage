@@ -203,7 +203,7 @@ function ArtifactForm({ onCreated }) {
           <input id="era" name="era" required maxLength={160} value={form.era} onChange={updateField} className={INPUT_CLASS} />
         </div>
         <div>
-          <label htmlFor="material" className={LABEL_CLASS}>Bahan</label>
+          <label htmlFor="material" className={LABEL_CLASS}>Penemu</label>
           <input id="material" name="material" maxLength={200} value={form.material} onChange={updateField} className={INPUT_CLASS} />
         </div>
         <div className="min-w-0 sm:col-span-2">
@@ -385,7 +385,7 @@ function ArtifactEditModal({ artifact, onCancel, onUpdated }) {
             <input id="edit-era" name="era" required maxLength={160} value={form.era} onChange={updateField} className={INPUT_CLASS} />
           </div>
           <div className="min-w-0">
-            <label htmlFor="edit-material" className={LABEL_CLASS}>Bahan</label>
+            <label htmlFor="edit-material" className={LABEL_CLASS}>Penemu</label>
             <input id="edit-material" name="material" maxLength={200} value={form.material} onChange={updateField} className={INPUT_CLASS} />
           </div>
           <div className="min-w-0 sm:col-span-2">

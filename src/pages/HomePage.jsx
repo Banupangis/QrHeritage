@@ -103,23 +103,37 @@ export default function HomePage() {
       artifact.description_en,
     ].some((value) => value?.toLocaleLowerCase('id').includes(normalizedSearch)))
     : artifacts
+  const visibleArtifacts = normalizedSearch ? filteredArtifacts : filteredArtifacts.slice(0, 6)
 
   useEffect(() => {
     if (!supabaseConfigured || !supabase) return undefined
     let active = true
 
     async function loadArtifacts() {
-      const { data, error } = await supabase
-        .from('artifacts')
-        .select('id, slug, title_id, title_en, era, description_id, description_en, image_url, image_alt')
-        .order('created_at', { ascending: false })
-        .limit(6)
+      const pageSize = 1000
+      const allArtifacts = []
+      let offset = 0
+      let loadError = null
+      while (true) {
+        const { data, error } = await supabase
+          .from('artifacts')
+          .select('id, slug, title_id, title_en, era, description_id, description_en, image_url, image_alt')
+          .order('created_at', { ascending: false })
+          .range(offset, offset + pageSize - 1)
+        if (error) {
+          loadError = error
+          break
+        }
+        allArtifacts.push(...(data ?? []))
+        if (!data || data.length < pageSize) break
+        offset += pageSize
+      }
 
       if (!active) return
-      if (error) {
-        setCollectionNotice(`Koleksi contoh ditampilkan karena koleksi Supabase belum dapat dimuat: ${error.message}`)
-      } else if (data?.length) {
-        setArtifacts(data)
+      if (loadError) {
+        setCollectionNotice(`Koleksi contoh ditampilkan karena koleksi Supabase belum dapat dimuat: ${loadError.message}`)
+      } else if (allArtifacts.length) {
+        setArtifacts(allArtifacts)
         setCollectionNotice('')
       } else {
         setCollectionNotice('Belum ada koleksi di Supabase. Berikut beberapa artefak contoh untuk pratinjau.')
@@ -202,13 +216,13 @@ export default function HomePage() {
 
             <div className="relative mt-6 max-w-xl">
               <Search aria-hidden="true" size={19} className={`pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 ${highContrast ? 'text-burgundy/70' : 'text-burgundy/60'}`} />
-              <label htmlFor="collection-search" className="sr-only">Cari temuan Sangiran</label>
+              <label htmlFor="collection-search" className="sr-only">Cari di seluruh koleksi Sangiran</label>
               <input
                 id="collection-search"
                 type="search"
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Cari nama temuan, era, atau deskripsi…"
+                placeholder="Cari di seluruh koleksi: nama, era, atau deskripsi…"
                 className={`min-h-12 w-full rounded-full border py-3 pl-11 pr-12 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${highContrast ? 'border-cream/50 bg-cream text-burgundy placeholder:text-burgundy/60' : 'border-burgundy/25 bg-white text-burgundy placeholder:text-burgundy/55'}`}
               />
               {searchQuery && (
@@ -231,11 +245,11 @@ export default function HomePage() {
 
             {filteredArtifacts.length > 0 ? (
               <>
-                {normalizedSearch && <p role="status" aria-live="polite" className="mt-5 text-sm">Ditemukan {filteredArtifacts.length} artefak.</p>}
+                {normalizedSearch && <p role="status" aria-live="polite" className="mt-5 text-sm">Ditemukan {filteredArtifacts.length} artefak di seluruh koleksi.</p>}
                 <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                  {filteredArtifacts.map((artifact) => <ArtifactCard key={artifact.id} artifact={artifact} highContrast={highContrast} />)}
+                  {visibleArtifacts.map((artifact) => <ArtifactCard key={artifact.id} artifact={artifact} highContrast={highContrast} />)}
                 </div>
-                {!normalizedSearch && artifacts.length > 0 && (
+                {!normalizedSearch && artifacts.length > 6 && (
                   <div className="mt-8 text-center">
                     <Link to="/koleksi" className={`inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 font-bold transition focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${highContrast ? 'border border-cream text-cream hover:bg-cream hover:text-burgundy' : 'border border-burgundy text-burgundy hover:bg-burgundy hover:text-cream'}`}>
                       Lihat lebih banyak
