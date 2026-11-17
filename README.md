@@ -1,6 +1,6 @@
-# Ruang Warisan
+# Situs Manusia Purba Sangiran
 
-An accessible, bilingual digital heritage museum built with React, Vite, Tailwind CSS, Supabase, and QR codes.
+An accessible, bilingual information and collection catalog for the Sangiran Early Man Site, built with React, Vite, Tailwind CSS, Supabase, and QR codes.
 
 ## Local setup
 

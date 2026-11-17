@@ -4,13 +4,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 const HomePage = lazy(() => import('./pages/HomePage.jsx'))
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard.jsx'))
 const PublicArtifactView = lazy(() => import('./pages/PublicArtifactView.jsx'))
+const CollectionPage = lazy(() => import('./pages/CollectionPage.jsx'))
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<main role="status" className="grid min-h-screen place-items-center bg-cream text-burgundy">Memuat museum…</main>}>
+      <Suspense fallback={<main role="status" className="grid min-h-screen place-items-center bg-cream text-burgundy">Memuat Situs Sangiran…</main>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/koleksi" element={<CollectionPage />} />
           <Route path="/artifact/:id" element={<PublicArtifactView />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="*" element={<HomePage />} />

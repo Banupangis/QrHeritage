@@ -637,8 +637,8 @@ export default function AdminDashboard() {
             <Link to="/" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
               <ArrowLeft aria-hidden="true" size={17} /> Beranda
             </Link>
-            <h1 className="mt-5 font-serif text-4xl font-bold">Studio koleksi</h1>
-            <p className="mt-2">Kelola artefak dan siapkan QR untuk ruang pamer.</p>
+            <h1 className="mt-5 font-serif text-4xl font-bold">Katalog Situs Sangiran</h1>
+            <p className="mt-2">Kelola data fosil dan temuan arkeologis serta siapkan QR untuk informasi pengunjung.</p>
           </div>
           <button type="button" onClick={() => { sessionStorage.removeItem('heritage-admin-unlocked'); setUnlocked(false) }} className="min-h-11 rounded-full border border-burgundy px-4 text-sm font-semibold hover:bg-white/50 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
             Keluar dari admin
@@ -654,8 +654,8 @@ export default function AdminDashboard() {
           <section aria-labelledby="collection-title" className="min-w-0">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-terracotta">QR studio</p>
-                <h2 id="collection-title" className="mt-1 font-serif text-3xl font-bold">Koleksi artefak</h2>
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-terracotta">Katalog digital Sangiran</p>
+                <h2 id="collection-title" className="mt-1 font-serif text-3xl font-bold">Fosil dan temuan arkeologis</h2>
               </div>
               <span className="rounded-full bg-primary/20 px-4 py-2 text-sm font-bold">{artifacts.length} artefak</span>
             </div>

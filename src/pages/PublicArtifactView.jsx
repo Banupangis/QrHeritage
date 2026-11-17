@@ -44,10 +44,10 @@ function SiteFooter({ highContrast }) {
     <footer className={`mt-16 border-t px-5 py-8 text-sm sm:px-8 ${highContrast ? 'border-cream/30 text-cream/90' : 'border-burgundy/20 text-burgundy/80'}`}>
       <div className="mx-auto flex max-w-6xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-xl leading-6">
-          Ruang Warisan didedikasikan untuk pendidikan dan konservasi budaya. Informasi koleksi disediakan tanpa tujuan komersial.
+          Katalog digital Situs Manusia Purba Sangiran mendukung pendidikan dan pelestarian. Informasi temuan disajikan untuk membantu memahami sejarah evolusi manusia.
         </p>
         <Link to="/" className="inline-flex items-center gap-2 font-semibold underline underline-offset-4">
-          <Landmark aria-hidden="true" size={17} /> Ruang Warisan
+          <Landmark aria-hidden="true" size={17} /> Situs Sangiran
         </Link>
       </div>
     </footer>
@@ -80,9 +80,9 @@ export default function PublicArtifactView() {
       if (!supabaseConfigured || !supabase) {
         if (prototypeArtifact) {
           setArtifact(prototypeArtifact)
-          setNotice('Anda sedang melihat artefak contoh untuk pratinjau museum.')
+          setNotice('Anda sedang melihat contoh edukasi katalog Situs Sangiran.')
         } else {
-          setError('Museum belum terhubung ke Supabase. Lengkapi VITE_SUPABASE_URL dan VITE_SUPABASE_ANON_KEY untuk memuat koleksi.')
+          setError('Katalog digital Sangiran belum terhubung ke Supabase. Lengkapi VITE_SUPABASE_URL dan VITE_SUPABASE_ANON_KEY untuk memuat data temuan.')
         }
         setLoading(false)
         return
@@ -120,7 +120,7 @@ export default function PublicArtifactView() {
       if (fetchError) {
         if (prototypeArtifact) {
           setArtifact(prototypeArtifact)
-          setNotice(`Artefak contoh ditampilkan karena koleksi Supabase belum dapat dimuat: ${fetchError.message}`)
+          setNotice(`Contoh edukasi ditampilkan karena katalog Sangiran belum dapat dimuat: ${fetchError.message}`)
         } else {
           setError(`Koleksi tidak dapat dimuat: ${fetchError.message}`)
         }
@@ -129,7 +129,7 @@ export default function PublicArtifactView() {
       } else {
         setArtifact(data)
         if (PROTOTYPE_ARTIFACTS.some((prototype) => prototype.id === data.id)) {
-          setNotice('Anda sedang melihat artefak contoh untuk pratinjau museum.')
+          setNotice('Anda sedang melihat contoh edukasi katalog Situs Sangiran.')
         } else if (getArtifactSlug(data) !== data.slug) {
           setNotice('Slug artefak ini belum tersimpan. Jalankan migrasi slug di Supabase untuk membuat tautan unik yang permanen.')
         }
@@ -186,7 +186,7 @@ export default function PublicArtifactView() {
   async function copyCitation() {
     const year = artifact.created_at ? new Date(artifact.created_at).getFullYear() : new Date().getFullYear()
     const workTitle = lang === 'ID' ? `${title} [Artefak museum]` : `${title} [Museum artifact]`
-    const citation = `Museum Konoha. (${year}). ${workTitle}. ${window.location.origin}/artifact/${artifact.id}`
+    const citation = `Situs Manusia Purba Sangiran. (${year}). ${workTitle}. ${window.location.origin}/artifact/${artifact.id}`
     try {
       await navigator.clipboard.writeText(citation)
       setNotice(lang === 'ID' ? 'Sitasi akademik berhasil disalin.' : 'Academic citation copied.')
@@ -266,7 +266,7 @@ export default function PublicArtifactView() {
               <h2 id="facts-title" className="font-serif text-xl font-bold">{lang === 'ID' ? 'Fakta singkat' : 'Quick facts'}</h2>
               <dl className="mt-5 grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2">
                 <div className="min-w-0">
-                  <dt className="text-xs font-bold uppercase tracking-wider opacity-70">{lang === 'ID' ? 'Bahan' : 'Material'}</dt>
+                  <dt className="text-xs font-bold uppercase tracking-wider opacity-70">{lang === 'ID' ? 'Penemu' : 'Material'}</dt>
                   <dd className="mt-1 break-words font-semibold">{artifact.material || '—'}</dd>
                 </div>
                 <div className="min-w-0">
