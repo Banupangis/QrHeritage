@@ -37,7 +37,7 @@ function ArtifactCard({ artifact, highContrast }) {
         />
       </Link>
       <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <span className="inline-flex rounded-full bg-primary/30 px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-burgundy">
+        <span className="inline-flex rounded bg-primary/30 px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-burgundy">
           {artifact.era}
         </span>
         <h3 className="mt-4 font-serif text-xl font-bold leading-snug">{titleId}</h3>

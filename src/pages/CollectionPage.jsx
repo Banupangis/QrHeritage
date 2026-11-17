@@ -88,7 +88,7 @@ export default function CollectionPage() {
                       <img src={artifact.image_url || PROTOTYPE_ARTIFACTS[0].image_url} alt={artifact.image_alt || `Ilustrasi ${artifact.title_id}`} className="aspect-[16/10] w-full object-cover" loading="lazy" />
                     </Link>
                     <div className="flex flex-1 flex-col p-5 sm:p-6">
-                      <span className="inline-flex w-fit rounded-full bg-primary/30 px-3 py-1.5 text-xs font-bold uppercase tracking-wide">{artifact.era}</span>
+                      <span className="inline-flex w-fit rounded bg-primary/30 px-3 py-1.5 text-xs font-bold uppercase tracking-wide">{artifact.era}</span>
                       <h2 className="mt-4 font-serif text-xl font-bold leading-snug">{artifact.title_id}</h2>
                       <p className="mt-1 text-sm font-medium text-burgundy/80">{artifact.title_en}</p>
                       <p className="mt-4 line-clamp-3 leading-7">{artifact.description_id || artifact.description_en}</p>
