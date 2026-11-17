@@ -161,9 +161,7 @@ export default function HomePage() {
             >
               <Contrast aria-hidden="true" size={19} />
             </button>
-            <Link to="/admin" className={`inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-semibold transition focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${highContrast ? 'border-cream hover:bg-cream hover:text-burgundy' : 'border-burgundy hover:bg-burgundy hover:text-cream'}`}>
-              Akses admin
-            </Link>
+
           </nav>
         </div>
       </header>
